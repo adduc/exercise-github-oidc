@@ -1,0 +1,17 @@
+name: Actions
+
+on:
+  push:
+
+permissions:
+  id-token: write
+
+env:
+  ROLE_ARN: arn:aws:iam::471112677734:role/ExerciseGithubOidc
+
+jobs:
+  actions:
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        role-to-assume: ${{ env.ROLE_ARN }}
