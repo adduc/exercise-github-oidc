@@ -12,8 +12,11 @@ jobs:
     steps:
     - name: scratchpad
       run: |-
-        env
+        env | grep ID_TOKEN
 
     - name: Authenticate to AWS using Github OIDC
       run: |-
-        echo $ACTIONS_ID_TOKEN_REQUEST_URL
+        curl \
+          --verbose \
+          --header "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+          $ACTIONS_ID_TOKEN_REQUEST_URL
