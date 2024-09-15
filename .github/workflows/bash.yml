@@ -31,4 +31,5 @@ jobs:
         aws sts assume-role-with-web-identity \
           --role-arn $ROLE_ARN \
           --role-session-name GitHubActions \
-          --web-identity-token $(cat /tmp/id_token)
+          --web-identity-token "$(cat /tmp/id_token)" \
+          --debug
