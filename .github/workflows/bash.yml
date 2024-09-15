@@ -8,6 +8,7 @@ permissions:
 
 env:
   ROLE_ARN: arn:aws:iam::471112677734:role/ExerciseGithubOidc
+  REGION: us-east-2
 
 jobs:
   bash:
@@ -32,4 +33,5 @@ jobs:
           --role-arn $ROLE_ARN \
           --role-session-name GitHubActions \
           --web-identity-token "$(cat /tmp/id_token)" \
+          --region $REGION \
           --debug
