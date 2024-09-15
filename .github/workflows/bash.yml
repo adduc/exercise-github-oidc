@@ -1,0 +1,16 @@
+name: Bash
+
+on:
+  push:
+
+jobs:
+  bash:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: scratchpad
+      run: |-
+        env
+
+    - name: Authenticate to AWS using Github OIDC
+      run: |-
+        echo $ACTIONS_ID_TOKEN_REQUEST_URL
