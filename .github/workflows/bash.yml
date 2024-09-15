@@ -28,6 +28,7 @@ jobs:
     - name: Use the ID token to authenticate to AWS
       run: |-
         aws sts assume-role-with-web-identity \
+          --duration-seconds 600 \
           --role-arn $ROLE_ARN \
-          --role-session-name session-name \
-          --web-identity-token file:///tmp/id_token
+          --role-session-name GitHubActions \
+          --web-identity-token $(cat /tmp/id_token)
