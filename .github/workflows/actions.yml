@@ -11,6 +11,8 @@ env:
 
 jobs:
   actions:
+    runs-on: ubuntu-24.04
+    steps:
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v3
       with:
