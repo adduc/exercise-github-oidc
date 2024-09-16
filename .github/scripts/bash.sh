@@ -1,9 +1,13 @@
 #!/bin/bash
 
+set -o errexit -o nounset -o pipefail
+
 # Authenticate to AWS using Github OIDC
 IDENTITY_TOKEN=$(
   curl \
-    --verbose \
+    --fail-with-body \
+    --silent \
+    --show-error \
     --header "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
     --header "User-Agent: actions/oidc-client" \
     --url-query "audience=sts.amazonaws.com" \
