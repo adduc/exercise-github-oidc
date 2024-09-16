@@ -20,7 +20,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v3
       with:
         role-to-assume: ${{ env.ROLE_ARN }}
-        aws-region: us-east-2
+        aws-region: ${{ env.REGION }}
 
   # Bash-based solution
   bash:
