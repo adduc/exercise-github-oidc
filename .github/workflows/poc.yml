@@ -1,4 +1,4 @@
-name: Bash
+name: Proof of Concept
 
 on:
   push:
@@ -27,4 +27,4 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - run: ./bash.sh
+      - run: .github/scripts/bash.sh
