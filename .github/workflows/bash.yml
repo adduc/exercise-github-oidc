@@ -11,28 +11,20 @@ env:
   REGION: us-east-2
 
 jobs:
+
+  # Actions-based solution
+  actions:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        role-to-assume: ${{ env.ROLE_ARN }}
+        aws-region: us-east-2
+
+  # Bash-based solution
   bash:
     runs-on: ubuntu-24.04
     steps:
-    - name: scratchpad
-      run: |-
-        env | grep ID_TOKEN
-
-    - name: Authenticate to AWS using Github OIDC
-      run: |-
-        curl \
-          --verbose \
-          --header "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-          --header "User-Agent: actions/oidc-client" \
-          --url-query "audience=sts.amazonaws.com" \
-          $ACTIONS_ID_TOKEN_REQUEST_URL \
-        | jq -r .value > /tmp/id_token
-    
-    - name: Use the ID token to authenticate to AWS
-      run: |-
-        aws sts assume-role-with-web-identity \
-          --role-arn $ROLE_ARN \
-          --role-session-name GitHubActions \
-          --web-identity-token "$(cat /tmp/id_token)" \
-          --region $REGION \
-          --debug
+      - uses: actions/checkout@v4
+      - run: ./bash.sh
