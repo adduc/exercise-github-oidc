@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -o errexit -o nounset -o pipefail -o xtrace
+set -o errexit -o nounset -o pipefail
 
 # Authenticate to AWS using Github OIDC
 IDENTITY_TOKEN=$(
@@ -22,13 +22,14 @@ AWS_CREDS=$(
     --role-session-name GitHubActions \
     --web-identity-token "$IDENTITY_TOKEN" \
     --region $REGION \
-    --debug
 )
 
 # Set the AWS credentials as environment variables
 export AWS_ACCESS_KEY_ID=$(echo $AWS_CREDS | jq -r .Credentials.AccessKeyId)
 export AWS_SECRET_ACCESS_KEY=$(echo $AWS_CREDS | jq -r .Credentials.SecretAccessKey)
 export AWS_SESSION_TOKEN=$(echo $AWS_CREDS | jq -r .Credentials.SessionToken)
+export AWS_DEFAULT_REGION=$REGION
+export AWS_REGION=$REGION
 
 # Fetch STS identity
 aws sts get-caller-identity --debug
