@@ -24,6 +24,7 @@ jobs:
           --verbose \
           --header "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
           --header "User-Agent: actions/oidc-client" \
+          --url-query "audience=sts.amazonaws.com" \
           $ACTIONS_ID_TOKEN_REQUEST_URL \
         | jq -r .value > /tmp/id_token
     
