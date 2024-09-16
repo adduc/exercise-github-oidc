@@ -32,4 +32,4 @@ export AWS_DEFAULT_REGION=$REGION
 export AWS_REGION=$REGION
 
 # Fetch STS identity
-aws sts get-caller-identity --debug
+aws sts get-caller-identity
